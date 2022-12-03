@@ -1,3 +1,6 @@
+//! Hexgametile 
+//!
+//! Implements the hexagonal tiles and their properties to be used with hexboard.
 use nannou::color::encoding::Srgb;
 use nannou::color::rgb::Rgb;
 use hex2d::Coordinate;
@@ -10,6 +13,7 @@ pub mod terrain;
 pub type Mrgb = Rgb<Srgb, u8>;
 
 /// Hexagonal tiles implement a trait specifying their axial location and how to draw them. 
-pub trait Rawr {
+trait Rawr {
     fn rawr(&self, c: Coordinate, d: &Draw, bounds: Rect);
 }
+

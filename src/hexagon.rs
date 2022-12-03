@@ -1,8 +1,9 @@
 use nannou::prelude::*;
-use crate::Rawr;
 use crate::terrain::Terrain;
 use hex2d::{Coordinate, Spacing};
+use hexboard::Hextile;
 
+/// HexagonalTile stores the scale and properties of each game tile.
 #[derive(Debug)]
 pub struct HexagonalTile {
     edge: f32,
@@ -17,9 +18,25 @@ impl HexagonalTile {
         }
     }
 
+    pub fn from_pixel(edge: f32, pixel: image::Rgba<u8>) -> Self {
+        HexagonalTile::new(edge, Terrain::from(pixel))
+    }
 }
 
-impl Rawr for HexagonalTile {
+impl Hextile for HexagonalTile {
+
+    fn default() -> Self {
+        HexagonalTile { edge: 25., terrain: Terrain::Air }
+    }
+
+    fn from_pixel(edge: f32, pixel: image::Rgba<u8>) -> Self {
+        HexagonalTile::from_pixel(edge, pixel)
+    }
+
+    fn resize(&self, new_edge_size: f32) -> Self {
+        HexagonalTile::new(new_edge_size, self.terrain)
+    }
+
     fn rawr(&self, axial: Coordinate, draw: &Draw, bounding_coordinates: Rect) {
         let hexagon_pixel_ctr = axial.to_pixel(Spacing::FlatTop(self.edge));
 
@@ -42,4 +59,6 @@ impl Rawr for HexagonalTile {
             draw.polyline().weight(1.0).points_colored(points);
         }
     }
+
+
 }

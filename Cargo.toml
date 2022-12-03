@@ -6,6 +6,7 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+hexboard = {path = "../hexboard"}
 nannou = "0.18.1"
 palette = { version = "0.5", features = [ "named" ]}
 hex2d = "1.1.0"
