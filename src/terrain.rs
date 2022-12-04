@@ -25,8 +25,11 @@ impl<T: std::cmp::PartialOrd<u8>> From<image::Rgba<T>> for Terrain {
         else if pix.0[0] == 89 && pix.0[1] == 204 && pix.0[2] == 9 {
             Terrain::Veg
         }
-        else if pix.0[0] == 255 && pix.0[1] == 130 && pix.0[2] == 3 {
+        else if pix.0[0] == 143 && pix.0[1] == 86 && pix.0[2] == 59 {
             Terrain::Wood
+        }
+        else if pix.0[0] == 255 && pix.0[1] == 130 && pix.0[2] == 3 {
+            Terrain::Earth
         }
         else {
             Terrain::Rock
@@ -38,10 +41,10 @@ impl Terrain {
     /// Controls how each terrain is represented using the Nannou palette. 
     pub fn color(&self) -> Mrgb {
         match self {
-            Terrain::Rock => PERU,
+            Terrain::Rock => SLATEGRAY,
             Terrain::Air => ALICEBLUE,
             Terrain::Veg => GREENYELLOW,
-            Terrain::Earth => ORANGERED,
+            Terrain::Earth => FIREBRICK,
             Terrain::Wood => GOLDENROD,
             _ => BLACK,
         }
